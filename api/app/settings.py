@@ -11,6 +11,10 @@ class Settings:
     database_path: Path
     web_origin: str
     owner_key: str | None
+    ai_enabled: bool = False
+    aws_region: str = "us-east-1"
+    model_id: str = "anthropic.claude-opus-5-5"
+    ai_timeout_seconds: float = 10.0
 
 
 def load_settings() -> Settings:
@@ -19,4 +23,8 @@ def load_settings() -> Settings:
         database_path=Path(os.environ.get("DATABASE_PATH", "data/orders.db")),
         web_origin=os.environ.get("WEB_ORIGIN", "http://localhost:3000"),
         owner_key=os.environ.get("OWNER_KEY") or None,
+        ai_enabled=os.environ.get("AI_ENABLED", "false").lower() in ("1", "true", "yes"),
+        aws_region=os.environ.get("AWS_REGION", "us-east-1"),
+        model_id=os.environ.get("MODEL_ID", "anthropic.claude-opus-5-5"),
+        ai_timeout_seconds=float(os.environ.get("AI_TIMEOUT_SECONDS", "10")),
     )

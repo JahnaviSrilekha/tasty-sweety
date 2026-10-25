@@ -32,13 +32,13 @@ Write the tests first. `[P]` marks tasks that can run at the same time as the ot
 - [x] T2.5 Check the responses against `contracts/openapi.yaml` in the API tests.
 
 ## Phase 3: Order assistant
-- [ ] T3.1 `parser_rules.py` with a table of at least 20 example sentences and expected
+- [x] T3.1 `parser_rules.py` with a table of at least 20 example sentences and expected
       results. — AC-3.2, AC-3.4
-- [ ] T3.2 `proposal.py` validator. — AC-3.3, AC-3.4
-- [ ] T3.3 `parser_ai.py`: Bedrock client, structured output, catalog in a cached system prompt,
+- [x] T3.2 `proposal.py` validator. — AC-3.3, AC-3.4
+- [x] T3.3 `parser_ai.py`: Bedrock client, structured output, catalog in a cached system prompt,
       10 s timeout. Tests use a fake client: wrong schema, refusal, timeout → rules. — AC-3.6, AC-3.7
-- [ ] T3.4 `POST /agent` AG-UI stream; a test checks the event order from design §5. — AC-3.1
-- [ ] T3.5 Suggestions ("for 20 people at Diwali"), AI only; rules reply "Please name the sweets". — AC-3.8
+- [x] T3.4 `POST /agent` AG-UI stream; a test checks the event order from design §5. — AC-3.1
+- [x] T3.5 Suggestions ("for 20 people at Diwali"), AI only; rules reply "Please name the sweets". — AC-3.8
 
 ## Phase 4: Web UI (mobile first)
 - [ ] T4.1 App shell: header, bottom cart bar on phones, colour tokens, light and dark. — AC-6.1, AC-6.5

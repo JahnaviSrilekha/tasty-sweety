@@ -1,24 +1,31 @@
 """HTTP API for spec 001. Contract: specs/001-sweet-ordering/contracts/openapi.yaml."""
 
 import hmac
+import logging
 import uuid
 from collections.abc import Callable
 from datetime import UTC, datetime
 from typing import Annotated
 
+from ag_ui.core import RunAgentInput
+from ag_ui.encoder import EventEncoder
 from fastapi import Depends, FastAPI, Header, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from app.agent import run_events
 from app.catalog import Catalog, read_catalog
 from app.checkout import Customer
 from app.orders import InvalidTransition, Order, Stage, transition
+from app.parser_ai import AiParser, bedrock_parser
 from app.pricing import CamelModel, Line, PricedLine, Quote, price_lines
 from app.settings import Settings, load_settings
 from app.store import OrderStore
+
+log = logging.getLogger(__name__)
 
 
 class ApiError(Exception):
@@ -89,13 +96,26 @@ def quote_for(lines: list[Line], catalog: Catalog) -> Quote:
     return price_lines(lines, catalog)
 
 
+def make_ai_parser(settings: Settings) -> AiParser | None:
+    if not settings.ai_enabled:
+        return None
+    try:
+        return bedrock_parser(settings.aws_region, settings.model_id, settings.ai_timeout_seconds)
+    except Exception:
+        log.exception("AI parser could not be set up; the assistant will use rules only")
+        return None
+
+
 def create_app(
-    settings: Settings | None = None, clock: Callable[[], datetime] | None = None
+    settings: Settings | None = None,
+    clock: Callable[[], datetime] | None = None,
+    ai_parser: AiParser | None = None,
 ) -> FastAPI:
     settings = settings or load_settings()
     now = clock or (lambda: datetime.now(UTC))
     catalog = read_catalog(settings.catalog_path)
     store = OrderStore(settings.database_path)
+    ai = ai_parser if ai_parser is not None else make_ai_parser(settings)
 
     app = FastAPI(title="Tasty Sweety API", version="0.1.0")
     app.add_middleware(
@@ -182,6 +202,16 @@ def create_app(
             raise ApiError(409, "invalid_transition", str(exc)) from None
         store.save(updated)
         return _json(updated)
+
+    @app.post("/agent")
+    def agent(run: RunAgentInput) -> StreamingResponse:
+        encoder = EventEncoder()
+        stream = (encoder.encode(event) for event in run_events(run, catalog, ai))
+        return StreamingResponse(
+            stream,
+            media_type=encoder.get_content_type(),
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+        )
 
     return app
 
