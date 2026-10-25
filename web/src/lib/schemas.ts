@@ -15,4 +15,8 @@ export const customerSchema = z
   })
   .transform(({ address, ...rest }) => (rest.fulfilment === "delivery" ? { ...rest, address } : rest));
 
-export type Customer = z.output<typeof customerSchema>;
+export type Customer = { name: string; phone: string; fulfilment: "pickup" | "delivery"; address?: string };
+
+// The schema's output must fit Customer.
+const _fits: (c: z.output<typeof customerSchema>) => Customer = (c) => c;
+void _fits;

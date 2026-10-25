@@ -41,14 +41,14 @@ Write the tests first. `[P]` marks tasks that can run at the same time as the ot
 - [x] T3.5 Suggestions ("for 20 people at Diwali"), AI only; rules reply "Please name the sweets". — AC-3.8
 
 ## Phase 4: Web UI (mobile first)
-- [ ] T4.1 App shell: header, bottom cart bar on phones, colour tokens, light and dark. — AC-6.1, AC-6.5
-- [ ] T4.2 Catalog page: cards, size picker, Add, search, unavailable state. — REQ-1, AC-2.1
-- [ ] T4.3 Cart page: quantity stepper, remove, totals, saved cart, reconcile notice. — REQ-2
-- [ ] T4.4 Assistant panel: `agui.ts` client, streamed reply, proposal card with
+- [x] T4.1 App shell: header, bottom cart bar on phones, colour tokens, light and dark. — AC-6.1, AC-6.5
+- [x] T4.2 Catalog page: cards, size picker, Add, search, unavailable state. — REQ-1, AC-2.1
+- [x] T4.3 Cart page: quantity stepper, remove, totals, saved cart, reconcile notice. — REQ-2
+- [x] T4.4 Assistant panel: `agui.ts` client, streamed reply, proposal card with
       Add / remove line / dismiss. — REQ-3
-- [ ] T4.5 Checkout page: form, quote, changed-total confirm, idempotency key, offline block. — REQ-4
-- [ ] T4.6 Order status page. — AC-5.1
-- [ ] T4.7 Owner page: enter key, list orders, allowed stage buttons only. — AC-5.2–5.4
+- [x] T4.5 Checkout page: form, quote, changed-total confirm, idempotency key, offline block. — REQ-4
+- [x] T4.6 Order status page. — AC-5.1
+- [x] T4.7 Owner page: enter key, list orders, allowed stage buttons only. — AC-5.2–5.4
 
 ## Phase 5: PWA
 - [ ] T5.1 `manifest.ts`, icons, apple-touch-icon. — AC-6.2

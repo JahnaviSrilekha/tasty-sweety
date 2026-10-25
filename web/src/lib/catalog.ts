@@ -24,3 +24,10 @@ export const catalog = data as Catalog;
 export function findSweet(c: Catalog, sweetId: string): Sweet | undefined {
   return c.sweets.find((s) => s.id === sweetId);
 }
+
+/** Sweets whose name or tags contain the query, ignoring case (AC-1.4). */
+export function filterSweets(sweets: Sweet[], query: string): Sweet[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return sweets;
+  return sweets.filter((s) => s.name.toLowerCase().includes(q) || s.tags.some((t) => t.toLowerCase().includes(q)));
+}

@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
+/* Colour tokens (spec 001, AC-6.5). Light first, dark follows the device setting. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #fdf8f1;
+  --surface: #ffffff;
+  --surface-2: #f8efe3;
+  --ink: #2b1a12;
+  --muted: #6b5446;
+  --line: #ead9c6;
+  --brand: #9f1239;
+  --brand-strong: #7f0f2e;
+  --on-brand: #ffffff;
+  --accent: #b45309;
+  --accent-soft: #fdecc8;
+  --ok: #166534;
+  --ok-soft: #dcfce7;
+  --danger: #b91c1c;
+  --danger-soft: #fee2e2;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #17100c;
+    --surface: #221812;
+    --surface-2: #2c2018;
+    --ink: #f7ede2;
+    --muted: #c9b3a1;
+    --line: #3e2e23;
+    --brand: #fb7185;
+    --brand-strong: #fda4af;
+    --on-brand: #2b0a12;
+    --accent: #fbbf24;
+    --accent-soft: #3d2a10;
+    --ok: #86efac;
+    --ok-soft: #12301d;
+    --danger: #fca5a5;
+    --danger-soft: #3b1414;
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-on-brand: var(--on-brand);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-fraunces);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
