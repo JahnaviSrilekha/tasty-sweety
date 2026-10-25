@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tasty-sweety.local/catalog.schema.json",
+  "title": "Tasty Sweety catalog",
+  "description": "The one catalog shared by web and api (spec 001, AC-1.5). Prices are integers in paise.",
+  "type": "object",
+  "properties": {
+    "currency": { "const": "INR" },
+    "sizes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "enum": ["small", "medium", "large"] },
+          "label": { "type": "string", "minLength": 1 },
+          "grams": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["id", "label", "grams"],
+        "additionalProperties": false
+      }
+    },
+    "sweets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+          "description": { "type": "string", "maxLength": 200 },
+          "image": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "aliases": { "type": "array", "items": { "type": "string" } },
+          "available": { "type": "boolean" },
+          "prices": {
+            "type": "object",
+            "properties": {
+              "small": { "type": "integer", "minimum": 0 },
+              "medium": { "type": "integer", "minimum": 0 },
+              "large": { "type": "integer", "minimum": 0 }
+            },
+            "required": ["small", "medium", "large"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["id", "name", "description", "image", "tags", "aliases", "available", "prices"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["currency", "sizes", "sweets"],
+  "additionalProperties": false
+}
