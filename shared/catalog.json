@@ -1,0 +1,70 @@
+{
+  "currency": "INR",
+  "sizes": [
+    { "id": "small", "label": "Small", "grams": 250 },
+    { "id": "medium", "label": "Medium", "grams": 500 },
+    { "id": "large", "label": "Large", "grams": 1000 }
+  ],
+  "sweets": [
+    {
+      "id": "kaju-katli",
+      "name": "Kaju Katli",
+      "description": "Thin cashew fudge diamonds with silver leaf.",
+      "image": "/sweets/kaju-katli.webp",
+      "tags": ["cashew", "barfi", "diwali"],
+      "aliases": ["kaju", "katli", "kaju barfi", "kaju katri"],
+      "available": true,
+      "prices": { "small": 32000, "medium": 62000, "large": 120000 }
+    },
+    {
+      "id": "motichoor-ladoo",
+      "name": "Motichoor Ladoo",
+      "description": "Soft balls of tiny fried gram-flour pearls in ghee and sugar syrup.",
+      "image": "/sweets/motichoor-ladoo.webp",
+      "tags": ["ladoo", "festival", "wedding"],
+      "aliases": ["ladoo", "laddu", "laddoo", "motichoor", "boondi ladoo"],
+      "available": true,
+      "prices": { "small": 18000, "medium": 34000, "large": 65000 }
+    },
+    {
+      "id": "gulab-jamun",
+      "name": "Gulab Jamun",
+      "description": "Milk dumplings fried golden and soaked in rose cardamom syrup.",
+      "image": "/sweets/gulab-jamun.webp",
+      "tags": ["syrup", "milk", "classic"],
+      "aliases": ["jamun", "gulabjamun", "gulab jamoon"],
+      "available": true,
+      "prices": { "small": 16000, "medium": 30000, "large": 58000 }
+    },
+    {
+      "id": "rasgulla",
+      "name": "Rasgulla",
+      "description": "Spongy cottage-cheese balls in light sugar syrup.",
+      "image": "/sweets/rasgulla.webp",
+      "tags": ["syrup", "chhena", "bengali"],
+      "aliases": ["rasagola", "rosogolla", "rasgula"],
+      "available": true,
+      "prices": { "small": 15000, "medium": 28000, "large": 54000 }
+    },
+    {
+      "id": "soan-papdi",
+      "name": "Soan Papdi",
+      "description": "Flaky, melt-in-the-mouth cubes of gram flour and ghee.",
+      "image": "/sweets/soan-papdi.webp",
+      "tags": ["flaky", "diwali", "gift"],
+      "aliases": ["soan", "son papdi", "sohan papdi", "patisa"],
+      "available": true,
+      "prices": { "small": 12000, "medium": 22000, "large": 42000 }
+    },
+    {
+      "id": "mysore-pak",
+      "name": "Mysore Pak",
+      "description": "Rich gram-flour and ghee fudge from Karnataka.",
+      "image": "/sweets/mysore-pak.webp",
+      "tags": ["ghee", "south indian", "classic"],
+      "aliases": ["mysorepak", "mysore paak"],
+      "available": true,
+      "prices": { "small": 22000, "medium": 42000, "large": 80000 }
+    }
+  ]
+}

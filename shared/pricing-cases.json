@@ -1,0 +1,73 @@
+{
+  "description": "Spec 001, AC-2.3: lines -> priced lines and total, in paise, against shared/catalog.json. Run by both web (Vitest) and api (pytest).",
+  "cases": [
+    {
+      "name": "empty cart",
+      "lines": [],
+      "lineTotals": [],
+      "total": 0
+    },
+    {
+      "name": "one small box",
+      "lines": [{ "sweetId": "kaju-katli", "size": "small", "qty": 1 }],
+      "lineTotals": [32000],
+      "total": 32000
+    },
+    {
+      "name": "one medium box",
+      "lines": [{ "sweetId": "gulab-jamun", "size": "medium", "qty": 1 }],
+      "lineTotals": [30000],
+      "total": 30000
+    },
+    {
+      "name": "one large box",
+      "lines": [{ "sweetId": "mysore-pak", "size": "large", "qty": 1 }],
+      "lineTotals": [80000],
+      "total": 80000
+    },
+    {
+      "name": "quantity multiplies unit price",
+      "lines": [{ "sweetId": "motichoor-ladoo", "size": "medium", "qty": 3 }],
+      "lineTotals": [102000],
+      "total": 102000
+    },
+    {
+      "name": "maximum quantity 99",
+      "lines": [{ "sweetId": "kaju-katli", "size": "large", "qty": 99 }],
+      "lineTotals": [11880000],
+      "total": 11880000
+    },
+    {
+      "name": "several lines, every size",
+      "lines": [
+        { "sweetId": "kaju-katli", "size": "large", "qty": 2 },
+        { "sweetId": "motichoor-ladoo", "size": "small", "qty": 1 },
+        { "sweetId": "rasgulla", "size": "medium", "qty": 4 }
+      ],
+      "lineTotals": [240000, 18000, 112000],
+      "total": 370000
+    },
+    {
+      "name": "same sweet in two sizes stays two lines",
+      "lines": [
+        { "sweetId": "soan-papdi", "size": "small", "qty": 2 },
+        { "sweetId": "soan-papdi", "size": "large", "qty": 1 }
+      ],
+      "lineTotals": [24000, 42000],
+      "total": 66000
+    },
+    {
+      "name": "every sweet once, medium",
+      "lines": [
+        { "sweetId": "kaju-katli", "size": "medium", "qty": 1 },
+        { "sweetId": "motichoor-ladoo", "size": "medium", "qty": 1 },
+        { "sweetId": "gulab-jamun", "size": "medium", "qty": 1 },
+        { "sweetId": "rasgulla", "size": "medium", "qty": 1 },
+        { "sweetId": "soan-papdi", "size": "medium", "qty": 1 },
+        { "sweetId": "mysore-pak", "size": "medium", "qty": 1 }
+      ],
+      "lineTotals": [62000, 34000, 30000, 28000, 22000, 42000],
+      "total": 218000
+    }
+  ]
+}

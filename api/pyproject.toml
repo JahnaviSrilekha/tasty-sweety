@@ -1,0 +1,25 @@
+[project]
+name = "tasty-sweety-api"
+version = "0.1.0"
+description = "Backend for Tasty Sweety (spec 001)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "httpx2",
+    "jsonschema",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

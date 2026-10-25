@@ -32,6 +32,7 @@ tasty-sweety/
     catalog.json              the one catalog (AC-1.5)
     catalog.schema.json       its JSON Schema
     pricing-cases.json        input → expected total, run by both test suites
+    checkout-cases.json       customer details → valid or not, run by both test suites
   web/
     scripts/sync-catalog.mjs  copies shared/catalog.json into src/generated/ before dev and build
     src/app/                  page.tsx (catalog), cart/, checkout/, orders/[id]/, owner/, manifest.ts

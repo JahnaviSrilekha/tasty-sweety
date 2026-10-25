@@ -1,0 +1,10 @@
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# Local order database
+api/data/
+
+.DS_Store
