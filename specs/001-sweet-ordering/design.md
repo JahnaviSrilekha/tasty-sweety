@@ -230,7 +230,7 @@ Full contract: [contracts/openapi.yaml](contracts/openapi.yaml).
 | GET | `/catalog` | Catalog JSON | 1 |
 | POST | `/quote` | Lines → priced lines and total | 4.3 |
 | POST | `/orders` | Place an order (`Idempotency-Key` header) | 4 |
-| GET | `/orders/{id}` | Order and stage | 5.1 |
+| GET | `/orders/{id}` | Order and stage, without customer details | 5.1, 5.5 |
 | GET | `/owner/orders` | All orders, newest first (`X-Owner-Key`) | 5.4 |
 | POST | `/owner/orders/{id}/stage` | Change stage (`X-Owner-Key`) | 5.2–5.4 |
 | POST | `/agent` | AG-UI assistant run (SSE) | 3 |

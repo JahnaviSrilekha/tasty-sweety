@@ -83,15 +83,15 @@ paths:
 
   /orders/{id}:
     get:
-      summary: Get an order (AC-5.1)
+      summary: Get an order's public status, without customer details (AC-5.1, AC-5.5)
       parameters:
         - { $ref: "#/components/parameters/OrderId" }
       responses:
         "200":
-          description: Order
+          description: Public order status
           content:
             application/json:
-              schema: { $ref: "#/components/schemas/Order" }
+              schema: { $ref: "#/components/schemas/PublicOrder" }
         "404": { $ref: "#/components/responses/Error" }
 
   /owner/orders:
@@ -135,6 +135,8 @@ paths:
           content:
             application/json:
               schema: { type: object, properties: { error: { $ref: "#/components/schemas/ErrorBody" } }, required: [error] }
+        "422": { $ref: "#/components/responses/Error" }
+        "503": { $ref: "#/components/responses/Error" }
 
   /agent:
     post:
@@ -199,14 +201,17 @@ components:
       additionalProperties: false
 
     PricedLine:
-      allOf:
-        - { $ref: "#/components/schemas/Line" }
-        - type: object
-          properties:
-            name: { type: string }
-            unitPrice: { type: integer, minimum: 0 }
-            lineTotal: { type: integer, minimum: 0 }
-          required: [name, unitPrice, lineTotal]
+      description: A Line with server prices. Written out in full because Line forbids extra fields.
+      type: object
+      properties:
+        sweetId: { type: string }
+        size: { $ref: "#/components/schemas/SizeId" }
+        qty: { type: integer, minimum: 1, maximum: 99 }
+        name: { type: string }
+        unitPrice: { type: integer, minimum: 0 }
+        lineTotal: { type: integer, minimum: 0 }
+      required: [sweetId, size, qty, name, unitPrice, lineTotal]
+      additionalProperties: false
 
     LinesRequest:
       type: object
@@ -262,6 +267,20 @@ components:
         history: { type: array, items: { $ref: "#/components/schemas/HistoryEntry" } }
         createdAt: { type: string, format: date-time }
       required: [id, lines, total, customer, stage, history, createdAt]
+
+    PublicOrder:
+      description: What anyone with the order number may see (AC-5.5). No customer details.
+      type: object
+      properties:
+        id: { type: string, pattern: "^TS-\\d{8}-\\d{4}$" }
+        lines: { type: array, items: { $ref: "#/components/schemas/PricedLine" } }
+        total: { type: integer, minimum: 0 }
+        fulfilment: { type: string, enum: [pickup, delivery] }
+        stage: { $ref: "#/components/schemas/Stage" }
+        history: { type: array, items: { $ref: "#/components/schemas/HistoryEntry" } }
+        createdAt: { type: string, format: date-time }
+      required: [id, lines, total, fulfilment, stage, history, createdAt]
+      additionalProperties: false
 
     ErrorBody:
       type: object

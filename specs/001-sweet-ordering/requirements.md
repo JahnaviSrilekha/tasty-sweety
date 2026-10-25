@@ -101,6 +101,9 @@ through the catalog.
   with an error.
 - **AC-5.3** WHEN the owner changes a stage, THE SYSTEM SHALL record who changed it and when.
 - **AC-5.4** The owner's controls SHALL need an owner access key. Customers SHALL NOT see them.
+- **AC-5.5** The order status page can be opened by anyone with the order number, so it SHALL
+  NOT show the customer's name, phone number or address. Only the owner's controls show them.
+  *(Added 2026-10-25 during Phase 2: order numbers are sequential and easy to guess.)*
 
 ## REQ-6 Mobile and PWA
 - **AC-6.1** THE SYSTEM SHALL be fully usable at 360 px width with no sideways scrolling, and
