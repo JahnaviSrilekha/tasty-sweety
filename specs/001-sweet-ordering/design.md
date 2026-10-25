@@ -205,6 +205,10 @@ Built with the `ag-ui-protocol` Python package (`ag_ui.core` events, `ag_ui.enco
 | 10 | `RUN_FINISHED` | threadId, runId |
 | — | `RUN_ERROR` | message, code, sent instead of 10 when something fails unexpectedly |
 
+The text is the last user message in `messages`. `RUN_ERROR` codes: `no_message` (no user text),
+`message_too_long` (over 500 characters, which also limits what is sent to the model) and
+`internal` (anything unexpected). `RUN_ERROR` follows `RUN_STARTED` and ends the stream.
+
 `propose_cart_lines` is a **frontend tool**: the web app renders it as the proposal card. It does
 not start a second run in 001.
 

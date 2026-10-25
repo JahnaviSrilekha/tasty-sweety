@@ -165,6 +165,7 @@ paths:
           content:
             text/event-stream:
               schema: { type: string }
+        "422": { $ref: "#/components/responses/Error" }
 
 components:
   securitySchemes:
