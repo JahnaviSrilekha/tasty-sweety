@@ -1,0 +1,166 @@
+{
+  "description": "Spec 001, AC-4.1: checkout customer details. valid cases give the normalised result. Run by web (Zod) and api (Pydantic).",
+  "cases": [
+    {
+      "name": "pickup, name trimmed",
+      "valid": true,
+      "customer": {
+        "name": "  Asha Rao ",
+        "phone": "9876543210",
+        "fulfilment": "pickup"
+      },
+      "normalised": {
+        "name": "Asha Rao",
+        "phone": "9876543210",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "delivery with address",
+      "valid": true,
+      "customer": {
+        "name": "Ravi",
+        "phone": "6000000000",
+        "fulfilment": "delivery",
+        "address": " 12 MG Road, Indiranagar, Bengaluru 560038 "
+      },
+      "normalised": {
+        "name": "Ravi",
+        "phone": "6000000000",
+        "fulfilment": "delivery",
+        "address": "12 MG Road, Indiranagar, Bengaluru 560038"
+      }
+    },
+    {
+      "name": "pickup drops any address",
+      "valid": true,
+      "customer": {
+        "name": "Ravi",
+        "phone": "7000000000",
+        "fulfilment": "pickup",
+        "address": "12 MG Road, Indiranagar, Bengaluru 560038"
+      },
+      "normalised": {
+        "name": "Ravi",
+        "phone": "7000000000",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "name of exactly 60 characters",
+      "valid": true,
+      "customer": {
+        "name": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "phone": "8000000000",
+        "fulfilment": "pickup"
+      },
+      "normalised": {
+        "name": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "phone": "8000000000",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "name too short after trimming",
+      "valid": false,
+      "customer": {
+        "name": " A ",
+        "phone": "9876543210",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "name too long",
+      "valid": false,
+      "customer": {
+        "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "phone": "9876543210",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "phone starts with 5",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "5876543210",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "phone has 9 digits",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "987654321",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "phone has 11 digits",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "98765432100",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "phone with +91 prefix",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "+919876543210",
+        "fulfilment": "pickup"
+      }
+    },
+    {
+      "name": "unknown fulfilment",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "9876543210",
+        "fulfilment": "courier"
+      }
+    },
+    {
+      "name": "delivery without address",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "9876543210",
+        "fulfilment": "delivery"
+      }
+    },
+    {
+      "name": "delivery address too short",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "9876543210",
+        "fulfilment": "delivery",
+        "address": "  MG Rd   "
+      }
+    },
+    {
+      "name": "delivery address too long",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "9876543210",
+        "fulfilment": "delivery",
+        "address": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "name": "extra field",
+      "valid": false,
+      "customer": {
+        "name": "Asha",
+        "phone": "9876543210",
+        "fulfilment": "pickup",
+        "email": "a@b.c"
+      }
+    }
+  ]
+}

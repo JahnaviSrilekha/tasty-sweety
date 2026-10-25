@@ -6,22 +6,23 @@ Write the tests first. `[P]` marks tasks that can run at the same time as the ot
 
 ## Phase 0: Foundations
 - [x] T0.1 Create the Next.js 16 app in `web/` (TypeScript, Tailwind, App Router).
-- [ ] T0.2 Write `shared/catalog.json` with the six starting sweets. Add a test that checks it
+- [x] T0.2 Write `shared/catalog.json` with the six starting sweets. Add a test that checks it
       against `catalog.schema.json`. — AC-1.5
-- [ ] T0.3 Write `shared/pricing-cases.json` (at least 8 cases: one line, many lines, qty 99,
+- [x] T0.3 Write `shared/pricing-cases.json` (at least 8 cases: one line, many lines, qty 99,
       every size). — AC-2.3
-- [ ] T0.4 [P] Create `api/` with uv, FastAPI, pytest, ruff and a `/health` endpoint.
-- [ ] T0.5 [P] Add Vitest and `scripts/sync-catalog.mjs` (runs before `dev` and `build`) to `web/`.
-- [ ] T0.6 Add `scripts/ac-coverage` that lists every AC in `requirements.md` with no test. — NFR-2
+- [x] T0.4 [P] Create `api/` with uv, FastAPI, pytest, ruff and a `/health` endpoint.
+- [x] T0.5 [P] Add Vitest and `scripts/sync-catalog.mjs` (runs before `dev` and `build`) to `web/`.
+- [x] T0.6 Add `scripts/ac-coverage` that lists every AC in `requirements.md` with no test. — NFR-2
 
 ## Phase 1: Deterministic core (no UI, no AI)
-- [ ] T1.1 [P] `api/app/pricing.py` + `web/src/lib/pricing.ts` + `money.ts`; both pass the shared
+- [x] T1.1 [P] `api/app/pricing.py` + `web/src/lib/pricing.ts` + `money.ts`; both pass the shared
       cases. — AC-1.2, AC-2.3
-- [ ] T1.2 [P] `web/src/lib/cart.ts` reducer: add, setQty, remove, addMany, clear, reconcile.
+- [x] T1.2 [P] `web/src/lib/cart.ts` reducer: add, setQty, remove, addMany, clear, reconcile.
       — AC-2.1, AC-2.2, AC-2.5
-- [ ] T1.3 [P] `api/app/orders.py`: transition table, `InvalidTransition`, history. — AC-5.2, AC-5.3
-- [ ] T1.4 Order storage in SQLite: daily order numbers, idempotency keys. — AC-4.4, AC-4.5
-- [ ] T1.5 [P] Checkout validation: Zod (web) and Pydantic (api), same rules. — AC-4.1
+- [x] T1.3 [P] `api/app/orders.py`: transition table, `InvalidTransition`, history. — AC-5.2, AC-5.3
+- [x] T1.4 Order storage in SQLite: daily order numbers, idempotency keys. — AC-4.4, AC-4.5
+- [x] T1.5 [P] Checkout validation: Zod (web) and Pydantic (api), same rules, both run
+      `shared/checkout-cases.json`. — AC-4.1
 
 ## Phase 2: HTTP API
 - [ ] T2.1 `GET /catalog`, `POST /quote`. — REQ-1, AC-4.3
