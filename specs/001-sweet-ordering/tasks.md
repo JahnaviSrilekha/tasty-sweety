@@ -25,11 +25,11 @@ Write the tests first. `[P]` marks tasks that can run at the same time as the ot
       `shared/checkout-cases.json`. — AC-4.1
 
 ## Phase 2: HTTP API
-- [ ] T2.1 `GET /catalog`, `POST /quote`. — REQ-1, AC-4.3
-- [ ] T2.2 `POST /orders` with expectedTotal check (409) and Idempotency-Key. — AC-4.2–4.5
-- [ ] T2.3 `GET /orders/{id}`. — AC-5.1
-- [ ] T2.4 Owner routes with `X-Owner-Key` (constant-time compare, 503 when not set). — AC-5.2–5.4
-- [ ] T2.5 Check the responses against `contracts/openapi.yaml` in the API tests.
+- [x] T2.1 `GET /catalog`, `POST /quote`. — REQ-1, AC-4.3
+- [x] T2.2 `POST /orders` with expectedTotal check (409) and Idempotency-Key. — AC-4.2–4.5
+- [x] T2.3 `GET /orders/{id}`, public view without customer details. — AC-5.1, AC-5.5
+- [x] T2.4 Owner routes with `X-Owner-Key` (constant-time compare, 503 when not set). — AC-5.2–5.4
+- [x] T2.5 Check the responses against `contracts/openapi.yaml` in the API tests.
 
 ## Phase 3: Order assistant
 - [ ] T3.1 `parser_rules.py` with a table of at least 20 example sentences and expected

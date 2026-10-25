@@ -662,6 +662,8 @@ dev = [
     { name = "httpx2" },
     { name = "jsonschema" },
     { name = "pytest" },
+    { name = "pyyaml" },
+    { name = "referencing" },
     { name = "ruff" },
 ]
 
@@ -677,6 +679,8 @@ dev = [
     { name = "httpx2" },
     { name = "jsonschema" },
     { name = "pytest" },
+    { name = "pyyaml", specifier = ">=6.0.3" },
+    { name = "referencing", specifier = ">=0.37.0" },
     { name = "ruff" },
 ]
 

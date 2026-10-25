@@ -88,6 +88,15 @@ class OrderStore:
         finally:
             db.close()
 
+    def get_by_idempotency_key(self, key: str) -> Order | None:
+        with closing(self._connect()) as db:
+            row = db.execute(
+                "SELECT o.data FROM idempotency_keys k JOIN orders o ON o.id = k.order_id"
+                " WHERE k.key = ?",
+                (key,),
+            ).fetchone()
+        return Order.model_validate_json(row[0]) if row else None
+
     def get(self, order_id: str) -> Order | None:
         with closing(self._connect()) as db:
             row = db.execute("SELECT data FROM orders WHERE id = ?", (order_id,)).fetchone()

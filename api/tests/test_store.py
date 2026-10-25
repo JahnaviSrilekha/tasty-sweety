@@ -71,3 +71,9 @@ def test_AC_5_4_list_is_newest_first(store):
     a, _ = place(store, "k1")
     b, _ = place(store, "k2", now=LATE_UTC + timedelta(minutes=1))
     assert [o.id for o in store.list_orders()] == [b.id, a.id]
+
+
+def test_AC_4_5_order_can_be_found_by_its_idempotency_key(store):
+    order, _ = place(store, "k1")
+    assert store.get_by_idempotency_key("k1") == order
+    assert store.get_by_idempotency_key("other") is None

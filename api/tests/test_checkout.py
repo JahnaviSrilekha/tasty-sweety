@@ -12,3 +12,8 @@ def test_AC_4_1_shared_checkout_cases(checkout_cases):
         else:
             with pytest.raises(ValidationError):
                 Customer.model_validate(case["customer"])
+
+
+def test_AC_4_1_pickup_customer_json_has_no_address_field():
+    customer = Customer(name="Asha", phone="9876543210", fulfilment="pickup")
+    assert "address" not in customer.model_dump(mode="json")
